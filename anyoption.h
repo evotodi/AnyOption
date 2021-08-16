@@ -21,11 +21,13 @@ enum class OptionType {
     FILE_FLAG = 6,
 };
 
-#define DEFAULT_MAXOPTS 10
-#define MAX_LONG_PREFIX_LENGTH 2
+enum {
+	DEFAULT_MAXOPTS=10,
+	MAX_LONG_PREFIX_LENGTH=2,
 
-#define DEFAULT_MAXUSAGE 3
-#define DEFAULT_MAXHELP 10
+	DEFAULT_MAXUSAGE=3,
+	DEFAULT_MAXHELP=10,
+};
 
 #define TRUE_FLAG "true"
 
