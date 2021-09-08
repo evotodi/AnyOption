@@ -11,24 +11,23 @@
 #include <stdlib.h>
 #include <string>
 
-#define COMMON_OPT 1
-#define COMMAND_OPT 2
-#define FILE_OPT 3
-#define COMMON_FLAG 4
-#define COMMAND_FLAG 5
-#define FILE_FLAG 6
+enum class OptionType {
+    INVALID_OPT = 0,
+    COMMON_OPT = 1,
+    COMMAND_OPT = 2,
+    FILE_OPT = 3,
+    COMMON_FLAG = 4,
+    COMMAND_FLAG = 5,
+    FILE_FLAG = 6,
+};
 
-#define COMMAND_OPTION_TYPE 1
-#define COMMAND_FLAG_TYPE 2
-#define FILE_OPTION_TYPE 3
-#define FILE_FLAG_TYPE 4
-#define UNKNOWN_TYPE 5
+enum {
+	DEFAULT_MAXOPTS=10,
+	MAX_LONG_PREFIX_LENGTH=2,
 
-#define DEFAULT_MAXOPTS 10
-#define MAX_LONG_PREFIX_LENGTH 2
-
-#define DEFAULT_MAXUSAGE 3
-#define DEFAULT_MAXHELP 10
+	DEFAULT_MAXUSAGE=3,
+	DEFAULT_MAXHELP=10,
+};
 
 #define TRUE_FLAG "true"
 
@@ -39,8 +38,8 @@ class AnyOption {
 public: /* the public interface */
   AnyOption();
 
-  explicit AnyOption(int maxoptions);
-  explicit AnyOption(int maxoptions, int maxcharoptions);
+  explicit AnyOption(unsigned int maxoptions);
+  explicit AnyOption(unsigned int maxoptions, unsigned int maxcharoptions);
   ~AnyOption();
 
   /*
@@ -127,7 +126,7 @@ public: /* the public interface */
    */
   void processOptions();
   void processCommandArgs();
-  void processCommandArgs(int max_args);
+  void processCommandArgs(unsigned int max_args);
   bool processFile();
 
   /*
@@ -171,19 +170,19 @@ private:                /* the hidden data structure */
 
   int *new_argv;      /* arguments sans options (index to argv) */
   int new_argc;       /* argument count sans the options */
-  int max_legal_args; /* ignore extra arguments */
+  unsigned int max_legal_args; /* ignore extra arguments */
 
   /* option strings storage + indexing */
-  int max_options;      /* maximum number of options */
+  unsigned int max_options; /* maximum number of options */
   const char **options; /* storage */
-  int *optiontype;      /* type - common, command, file */
+  OptionType *optiontype; /* type - common, command, file */
   int *optionindex;     /* index into value storage */
-  int option_counter;   /* counter for added options  */
+  unsigned int option_counter;   /* counter for added options  */
 
   /* option chars storage + indexing */
-  int max_char_options; /* maximum number options */
+  unsigned int max_char_options;  /* maximum number options */
   char *optionchars;    /*  storage */
-  int *optchartype;     /* type - common, command, file */
+  OptionType *optchartype;     /* type - common, command, file */
   int *optcharindex;    /* index into value storage */
   int optchar_counter;  /* counter for added options  */
 
@@ -193,8 +192,8 @@ private:                /* the hidden data structure */
 
   /* help and usage */
   const char **usage;  /* usage */
-  int max_usage_lines; /* max usage lines reserved */
-  int usage_lines;     /* number of usage lines */
+  unsigned int max_usage_lines; /* max usage lines reserved */
+  unsigned int usage_lines;     /* number of usage lines */
 
   bool command_set;   /* if argc/argv were provided */
   bool file_set;      /* if a filename was provided */
@@ -223,7 +222,7 @@ private:                /* the hidden data structure */
 
 private: /* the hidden utils */
   void init();
-  void init(int maxopt, int maxcharopt);
+  void init(unsigned int maxopt, unsigned int maxcharopt);
   bool alloc();
   void allocValues(int index, size_t length);
   void cleanup();
@@ -239,8 +238,8 @@ private: /* the hidden utils */
   bool setValue(char optchar, char *value);
   bool setFlagOn(char optchar);
 
-  void addOption(const char *option, int type);
-  void addOption(char optchar, int type);
+  void addOption(const char *option, OptionType type);
+  void addOption(char optchar, OptionType type);
   void addOptionError(const char *opt) const;
   void addOptionError(char opt) const;
   bool findFlag(char *value);
