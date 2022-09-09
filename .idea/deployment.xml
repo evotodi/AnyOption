@@ -2,22 +2,14 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="RemoteCMakeHVAC (6f08d02c-5eaa-4b2f-a298-62ede93d5f7e)">
+      <paths name="RDC (1ec0545e-f1fe-4b21-87ab-58709903b925)">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.oYZKLcxrKk" local="$PROJECT_DIR$" />
+            <mapping deploy="/AnyOption" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-rdc" />
           </excludedPaths>
-        </serverdata>
-      </paths>
-      <paths name="RemoteCMakeRDC (8161d9c5-d7d2-4e36-b959-73902403515c)">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
         </serverdata>
       </paths>
     </serverData>

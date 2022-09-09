@@ -8,7 +8,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
 
 enum class OptionType {
@@ -30,8 +30,6 @@ enum {
 };
 
 #define TRUE_FLAG "true"
-
-using namespace std;
 
 class AnyOption {
 
@@ -158,9 +156,9 @@ public: /* the public interface */
   /*
    * get the argument count and arguments sans the options
    */
-  int getArgc() const;
-  char *getArgv(int index) const;
-  bool hasOptions() const;
+  [[nodiscard]] int getArgc() const;
+  [[nodiscard]] char *getArgv(int index) const;
+  [[nodiscard]] bool hasOptions() const;
 
 private:                /* the hidden data structure */
   int argc;             /* command line arg count  */
@@ -244,9 +242,9 @@ private: /* the hidden utils */
   void addOptionError(char opt) const;
   bool findFlag(char *value);
   void addUsageError(const char *line);
-  bool CommandSet() const;
-  bool FileSet() const;
-  bool POSIX() const;
+  [[nodiscard]] bool CommandSet() const;
+  [[nodiscard]] bool FileSet() const;
+  [[nodiscard]] bool POSIX() const;
 
   char parsePOSIX(char *arg);
   int parseGNU(char *arg);
