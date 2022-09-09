@@ -22,3 +22,5 @@ August 2004, added bug-fixes, and updates send by Michael Peters of Sandia Lab.
 September 2006, fix from Boyan Asenov for a bug in mixing up option type indexes. 
 
 July 2011, fix from Min KJ and Costantino G for string allocation. 
+
+September 2022, Removed the 'using namespace std' from the header. Added a tag NoUsingStd.
